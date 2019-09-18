@@ -48,6 +48,14 @@ function makeStudentReport(data) {
 }
 
 function enrollInSummerSchool(students) {
-  students.forEach(student => student.status = 'In Summer School');
+  students.forEach(student => (student.status = 'In Summer School'));
   return students;
+}
+
+function findById(items, idNum) {
+  let result;
+  items.forEach(obj => {
+    if (obj.id === idNum) result = obj;
+  });
+  return result;
 }
