@@ -1,5 +1,15 @@
 'use strict';
 
+const HEROES = [
+  { id: 1, name: 'Captain America', squad: 'Avengers' },
+  { id: 2, name: 'Iron Man', squad: 'Avengers' },
+  { id: 3, name: 'Spiderman', squad: 'Avengers' },
+  { id: 4, name: 'Superman', squad: 'Justice League' },
+  { id: 5, name: 'Wonder Woman', squad: 'Justice League' },
+  { id: 6, name: 'Aquaman', squad: 'Justice League' },
+  { id: 7, name: 'Hulk', squad: 'Avengers' },
+];
+
 let loaf = {
   flour: 300,
   water: 210,
@@ -126,13 +136,10 @@ let strongChars = characters.filter(object => object.attack > 5);
 * with a new one that handles 'weapon'. And we would have to 
 * Or we could adjust the old factory function. 
 * An alternative (but not optimal) approach would be to
-* define new properties for each individual object {foo= 'bar';}
-* Or, we can have a function that takes the object and adds the weapon and a key.
+* define new properties for each individual object foo.weapon = (some weapon); foo.describe() {new describe}
+* Or, we can have a function that takes the object and adds the weapon and updates the describe function.
 */
 
-// function addWeapon(char, weap) {
-//   char.weapon = weap;
-// }
 function addWeapon(char, weap) {
   char.weapon = weap; char.describe = function () {
     console.log(`${this.name} is a ${this.race} from ${this.origin} who uses ${this.weapon}`);
@@ -141,5 +148,34 @@ function addWeapon(char, weap) {
 
 addWeapon(characters.find(char => char.nickname = 'gandalf'), 'a wizard staff');
 
-console.log(characters[0]);
-characters[0].describe();
+// console.log(characters[0]);
+// characters[0].describe();
+
+function findOne (arr, query) {
+  let mismatches = []; //will hold indices of items that don't match
+
+  arr.forEach((obj, idx) => { //loop over all entries in arr
+    for (let key in query){ //loop over all keys in query
+      if(arr[idx][key] !== query[key]){ //check for mismatch
+        mismatches.push(idx); //flag it
+      }
+    }
+  });
+  arr.forEach((obj, idx) => {
+    if (!mismatches.includes(idx)) { //if it's not in mismatches, we're good
+      return arr[idx];
+    }
+  });
+  return null; //didn't find anything
+}
+console.log(findOne(HEROES, { id: 1 }));
+
+console.log(findOne(HEROES, { id: 10 }));
+
+console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
+
+console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
+
+console.log(findOne(HEROES, { squad: 'Justice League' }));
+
+console.log(findOne(HEROES, { squad: 'Justice League',  name: 'Wonder Woman'}));
