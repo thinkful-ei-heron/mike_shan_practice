@@ -27,4 +27,27 @@ let hobbit = {
   meals: ['breakfast', 'second breakfast', 'elevenses', 'lunch', 'afternoon tea', 'dinner', 'supper'],
 };
 
-console.log(hobbit.meals[3]);
+//console.log(hobbit.meals[3]);
+
+let john = {
+  name: "John Fritz",
+  jobTitle: "Grand High Poobah of Developer Relations"
+}
+let cynthia = {
+  name: "Cynthia Robertson",
+  jobTitle: "Recruiter"
+}
+let dave = {
+  name: "Dave Hsu",
+  jobTitle: "Ops Manager"
+}
+let gary = {
+  name: "Gary Richards",
+  jobTitle: "Translator"
+}
+
+let people = [john, cynthia, dave, gary];
+
+// people.forEach(obj => {
+//   console.log(`${obj.name}: ${obj.jobTitle}`);
+// });
