@@ -38,3 +38,11 @@ function keyDeleter(obj) {
   delete obj.bar;
   return obj;
 }
+
+function makeStudentReport(data) {
+  let results = [];
+  data.forEach(item => {
+    results.push(`${item.name}: ${item.grade}`);
+  });
+  return results;
+}
