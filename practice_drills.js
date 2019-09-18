@@ -31,3 +31,10 @@ function personMaker() {
   };
   return person;
 }
+
+function keyDeleter(obj) {
+  // delete foo and bar
+  delete obj.foo;
+  delete obj.bar;
+  return obj;
+}
