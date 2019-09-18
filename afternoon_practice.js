@@ -55,7 +55,28 @@ let people = [john, cynthia, dave, gary];
 //   console.log(`${obj.name}: ${obj.jobTitle}`);
 // });
 
-people.forEach(obj => {
-  console.log(`${obj.jobTitle} ${obj.name} ${
-    obj.boss ? `reports to ${obj.boss}.` : 'doesn\'t report to anybody.'}`);
-});
+// people.forEach(obj => {
+//   console.log(`${obj.jobTitle} ${obj.name} ${
+//     obj.boss ? `reports to ${obj.boss}.` : 'doesn\'t report to anybody.'}`);
+// });
+
+
+let cipher = {
+  a : 1,
+  b : 2,
+  c : 3,
+  d : 4
+};
+
+function decodeWords(str){
+  return str
+    .toLowerCase()
+    .split(' ')
+    .filter(Boolean)
+    .map(word => {
+      return cipher[word.charAt(0)] ? word.charAt(cipher[word.charAt(0)]) : ' ';
+    })
+    .join('')
+}
+
+console.log(decodeWords('craft block argon meter bells brown croon droop'));
