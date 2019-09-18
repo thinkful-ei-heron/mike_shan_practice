@@ -151,17 +151,17 @@ addWeapon(characters.find(char => char.nickname = 'gandalf'), 'a wizard staff');
 // console.log(characters[0]);
 // characters[0].describe();
 
-function findOne (arr, query) {
+function findOne(arr, query) {
   let mismatches = []; //will hold indices of items that don't match
 
   arr.forEach((obj, idx) => { //loop over all entries in arr
-    for (let key in query){ //loop over all keys in query
-      if(arr[idx][key] !== query[key]){ //check for mismatch
+    for (let key in query) { //loop over all keys in query
+      if (arr[idx][key] !== query[key]) { //check for mismatch
         mismatches.push(idx); //flag it
       }
     }
   });
-  let result = null
+  let result = null;
   arr.forEach((obj, idx) => {
     if (!mismatches.includes(idx) && result === null) { //if it's not in mismatches, we're good
       result = arr[idx];
@@ -169,14 +169,59 @@ function findOne (arr, query) {
   });
   return result;
 }
-console.log(findOne(HEROES, { id: 1 }));
+// console.log(findOne(HEROES, { id: 1 }));
 
-console.log(findOne(HEROES, { id: 10 }));
+// console.log(findOne(HEROES, { id: 10 }));
 
-console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
+// console.log(findOne(HEROES, { id: 2, name: 'Aquaman' }));
 
-console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
+// console.log(findOne(HEROES, { id: 5, squad: 'Justice League' }));
 
-console.log(findOne(HEROES, { squad: 'Justice League' }));
+// console.log(findOne(HEROES, { squad: 'Justice League' }));
 
-console.log(findOne(HEROES, { squad: 'Justice League',  name: 'Wonder Woman'}));
+// console.log(findOne(HEROES, { squad: 'Justice League',  name: 'Wonder Woman'}));
+
+
+const Database = {
+  findOne(query) {
+    let mismatches = [];
+
+    let data = this.store.heroes;
+    data.forEach((obj, idx) => {
+      // console.log(idx);
+      for (let key in query) {
+        // console.log(key);
+        if (data[idx][key] !== query[key]) {
+          mismatches.push(idx);
+          // console.log('mismatch:' + data[idx][key] + query[key]);
+        }
+      }
+    });
+    // console.log(mismatches);
+    let result = null;
+    data.forEach((obj, idx) => {
+      // console.log(idx);
+      // console.log(mismatches.includes(idx));
+      if (!mismatches.includes(idx) && result === null) {
+        // console.log(data[idx]);
+        result = data[idx];
+      }
+    });
+    return result;
+  },
+
+
+  store: {
+    heroes: [
+      { id: 1, name: 'Captain America', squad: 'Avengers' },
+      { id: 2, name: 'Iron Man', squad: 'Avengers' },
+      { id: 3, name: 'Spiderman', squad: 'Avengers' },
+      { id: 4, name: 'Superman', squad: 'Justice League' },
+      { id: 5, name: 'Wonder Woman', squad: 'Justice League' },
+      { id: 6, name: 'Aquaman', squad: 'Justice League' },
+      { id: 7, name: 'Hulk', squad: 'Avengers' },
+    ]
+  }
+};
+
+console.log(Database.findOne({ id: 2 }));
