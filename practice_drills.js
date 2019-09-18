@@ -59,3 +59,17 @@ function findById(items, idNum) {
   });
   return result;
 }
+
+function validateKeys(object, expectedKeys) {
+  if (Object.keys(object).length !== expectedKeys.length){
+    return false; //we have extra or missing keys
+  }
+  //check all keys in object are expected
+  for (let key in object){
+    if (!expectedKeys.includes(key)){
+      return false;
+    }
+  }
+  //everything is ok
+  return true;
+}
