@@ -62,13 +62,13 @@ let people = [john, cynthia, dave, gary];
 
 
 let cipher = {
-  a : 1,
-  b : 2,
-  c : 3,
-  d : 4
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4
 };
 
-function decodeWords(str){
+function decodeWords(str) {
   return str
     .toLowerCase()
     .split(' ')
@@ -76,7 +76,70 @@ function decodeWords(str){
     .map(word => {
       return cipher[word.charAt(0)] ? word.charAt(cipher[word.charAt(0)]) : ' ';
     })
-    .join('')
+    .join('');
 }
 
-console.log(decodeWords('craft block argon meter bells brown croon droop'));
+// console.log(decodeWords('craft block argon meter bells brown croon droop'));
+
+
+function createCharacter(name, nickname, race, origin, attack, defense) {
+  return {
+    name,
+    nickname,
+    race,
+    origin,
+    attack,
+    defense,
+    describe() {
+      console.log(`${this.name} is a ${this.race} from ${this.origin}.`);
+    },
+    evaluateFight(char) {
+      let x = Math.max(this.attack - char.defense, 0); //my attack - opponents defense
+      let y = Math.max(char.attack - this.defense, 0); // opponents attack - my defense
+      return `Your opponent takes ${x} damage and you recieve ${y} damage.`;
+    },
+  };
+}
+
+let characters = [
+  createCharacter('Gandalf the White', 'gandalf', 'wizard', 'Middle Earth', 10, 6),
+  createCharacter('Bilbo Baggins', 'bilbo', 'Hobbit', 'The Shire', 2, 1),
+  createCharacter('Frodo Baggins', 'frodo', 'Hobbit', 'The Shire', 3, 2),
+  createCharacter('Aragorn son of Arathorn', 'aragorn', 'Man', 'Dunnedain', 6, 8),
+  createCharacter('Legolas', 'legolas', 'Elf', 'Woodland Realm', 8, 5)
+];
+
+characters.push(createCharacter('Arwen Undomiel', 'Arwen', 'Elf', 'Rivendell', 9, 6));
+
+// console.log(characters);
+
+// characters.find(obj => obj.nickname === 'aragorn').describe();
+
+let hobbits = characters.filter(object => object.race === 'Hobbit');
+let strongChars = characters.filter(object => object.attack > 5);
+
+/* Question: What if you wanted to equip a weapon for each character 
+* and change how they are described?
+* We could approach this in multiple ways 
+* we could create a new factory function which calls the old factory function
+* and pushes a new value onto the object and replaces its describe function
+* with a new one that handles 'weapon'. And we would have to 
+* Or we could adjust the old factory function. 
+* An alternative (but not optimal) approach would be to
+* define new properties for each individual object {foo= 'bar';}
+* Or, we can have a function that takes the object and adds the weapon and a key.
+*/
+
+// function addWeapon(char, weap) {
+//   char.weapon = weap;
+// }
+function addWeapon(char, weap) {
+  char.weapon = weap; char.describe = function () {
+    console.log(`${this.name} is a ${this.race} from ${this.origin} who uses ${this.weapon}`);
+  };
+}
+
+addWeapon(characters.find(char => char.nickname = 'gandalf'), 'a wizard staff');
+
+console.log(characters[0]);
+characters[0].describe();
