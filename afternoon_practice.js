@@ -19,6 +19,12 @@ let metasyntactic = {
   spam: 'eggs'
 };
 
-for (let key in metasyntactic) {
-  console.log(`${key}: ${metasyntactic[key]}`);
-}
+// for (let key in metasyntactic) {
+//   console.log(`${key}: ${metasyntactic[key]}`);
+// }
+
+let hobbit = {
+  meals: ['breakfast', 'second breakfast', 'elevenses', 'lunch', 'afternoon tea', 'dinner', 'supper'],
+};
+
+console.log(hobbit.meals[3]);
