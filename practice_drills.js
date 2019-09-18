@@ -11,7 +11,7 @@ function createMyObject() {
   };
 }
 
-console.log(createMyObject());
+// console.log(createMyObject());
 
 function updateObject(obj) {
   obj.foo = 'foo';
@@ -19,4 +19,15 @@ function updateObject(obj) {
   obj.bizz = 'bizz';
   obj.bang = 'bang';
   return obj;
+}
+
+function personMaker() {
+  var person = {
+    firstName: 'Paul',
+    lastName: 'Jones',
+    fullName: function() {
+      return `${this.firstName} ${this.lastName}`;
+    }
+  };
+  return person;
 }
