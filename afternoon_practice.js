@@ -30,24 +30,32 @@ let hobbit = {
 //console.log(hobbit.meals[3]);
 
 let john = {
-  name: "John Fritz",
-  jobTitle: "Grand High Poobah of Developer Relations"
-}
+  name: 'John Fritz',
+  jobTitle: 'Grand High Poobah of Developer Relations'
+};
 let cynthia = {
-  name: "Cynthia Robertson",
-  jobTitle: "Recruiter"
-}
+  name: 'Cynthia Robertson',
+  jobTitle: 'Recruiter',
+  boss: 'John'
+};
 let dave = {
-  name: "Dave Hsu",
-  jobTitle: "Ops Manager"
-}
+  name: 'Dave Hsu',
+  jobTitle: 'Ops Manager',
+  boss: 'John'
+};
 let gary = {
-  name: "Gary Richards",
-  jobTitle: "Translator"
-}
+  name: 'Gary Richards',
+  jobTitle: 'Translator',
+  boss: 'Dave'
+};
 
 let people = [john, cynthia, dave, gary];
 
 // people.forEach(obj => {
 //   console.log(`${obj.name}: ${obj.jobTitle}`);
 // });
+
+people.forEach(obj => {
+  console.log(`${obj.jobTitle} ${obj.name} ${
+    obj.boss ? `reports to ${obj.boss}.` : 'doesn\'t report to anybody.'}`);
+});
