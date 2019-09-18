@@ -46,3 +46,8 @@ function makeStudentReport(data) {
   });
   return results;
 }
+
+function enrollInSummerSchool(students) {
+  students.forEach(student => student.status = 'In Summer School');
+  return students;
+}
