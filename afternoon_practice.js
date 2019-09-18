@@ -161,12 +161,13 @@ function findOne (arr, query) {
       }
     }
   });
+  let result = null
   arr.forEach((obj, idx) => {
-    if (!mismatches.includes(idx)) { //if it's not in mismatches, we're good
-      return arr[idx];
+    if (!mismatches.includes(idx) && result === null) { //if it's not in mismatches, we're good
+      result = arr[idx];
     }
   });
-  return null; //didn't find anything
+  return result;
 }
 console.log(findOne(HEROES, { id: 1 }));
 
